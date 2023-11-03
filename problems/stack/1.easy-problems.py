@@ -1,5 +1,4 @@
-from implement_ds import Stack
-import copy
+from imports import *
 
 #Ejemplos
 s0=Stack(4)
@@ -87,11 +86,21 @@ def is_balanced(str: str)->bool:
 #print(is_balanced("{4+[[5)")) #not balance
 
 """
+implement a function to evaluate infix arithmetic, expressions:
+4*[5+(3-{5+2})]
+"""
+def eval_infix(exp:str)->int:
+    tokens=re.findall(r"\b\w+[\.]?\w*\b|[\+\-\*\/\%\^\)\(]",exp)
+    s=Stack(len(exp))
+
+    for token in tokens:
+        pass
+
+"""
 (7)
 implement a function to evaluate postfix, prefix expressions,
 trabaja con operadores binarios
 """
-import re
 def eval_postfix(exp:str)->int:
     s=Stack(len(exp))
     tokens = exp.split()

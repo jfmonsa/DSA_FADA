@@ -1,5 +1,4 @@
-from implement_ds import Stack
-import copy, re
+from imports import *
 
 """
 Description:
