@@ -1,4 +1,5 @@
 from imports import *
+from imports import Stack
 
 #Auxiliary operations
 def precedence(op:str)->int:
@@ -22,7 +23,7 @@ e.g. (X + Y) or (X Y +) or (+ X Y). and finally remove any superfluous brackets.
 TODO: implementar unit-testing
 #post->inf pre | inf-> post pre | pre->int post
 """
-
+ 
 #test_expressions
 infix_exps = ["3+4*(2-1)",
             "((A+B)-C*(D/E))+F",

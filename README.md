@@ -1,3 +1,23 @@
+Estructura de archivos actual
+
+```
+proyecto
+├── .gitignore
+├── README.md
+├── implement_ds
+│   └── stack.py
+├── main.py
+└── problems
+    └── stack-problems
+        ├── 1.easy-problems.py
+        ├── __pycache__
+        │   └── imports.cpython-311.pyc
+        ├── artmetic-expressions-infix-postfix-prefix.py
+        └── imports.py
+```
+
+
+Objetivo de estructura de archivos
 ```
 mi_proyecto/
 |-- estructuras_de_datos/
