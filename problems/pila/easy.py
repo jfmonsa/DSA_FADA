@@ -1,4 +1,5 @@
-from imports import *
+from implement_ds.stack import Stack
+import copy
 
 #Ejemplos
 s0=Stack(4)
@@ -56,5 +57,5 @@ s2.push(2)
 s2.push(9)
 s2.push(9)
 s2.push(2)
-#print(is_capicua(s2))
-#print(is_capicua(s1))
+print(is_capicua(s2))
+print(is_capicua(s1))

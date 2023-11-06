@@ -1,14 +1,15 @@
-from imports import *
-from imports import Stack
+from implement_ds.stack import Stack
+import copy, re 
 
 #Auxiliary operations
 def precedence(op:str)->int:
-        PRECEDENCE = {'+': 1, '-': 1, '*': 2, '/': 2, '%':2, '^': 3}
-        return PRECEDENCE[op]
-
+        if is_operator(op):
+            PRECEDENCE = {'+': 1, '-': 1, '*': 2, '/': 2, '%':2, '^': 3}
+            return PRECEDENCE[op]
+        elif op=="(":
+            return 0
 def is_operator(char:str)->bool:
         return char in "+-*/^%"
-
 
 """
 (1)
@@ -377,7 +378,7 @@ def eval_infix(exp:str)->int:
         if token.isdecimal():
             s_operands.push(token)
         elif token=="(":
-            s_operators.push()
+            s_operators.push(token)
         elif token==")":
             if s_operands.size()>=2:
                 op_a=s_operands.pop()
@@ -394,8 +395,9 @@ def eval_infix(exp:str)->int:
             #s_operators.top() is the previous operator
             #if prev operator <= current operator
             while not s_operators.is_empty() and precedence(s_operators.top())<=precedence(token):
-                op_a=s_operands.pop()
-                op_b=s_operands.pop()
+                operator=s_operators.pop()
+                op_a=str(s_operands.pop())
+                op_b=str(s_operands.pop())
                 s_operands.push(eval(op_a+operator+op_b))
             else:
                 s_operators.push(token)
@@ -404,9 +406,9 @@ def eval_infix(exp:str)->int:
     #terminar de procesar lo que aún quede en la lista de operadores
     while not s_operators.is_empty():
         if s_operands.size()>=2:
-            op_a=s_operands.pop()
-            op_b=s_operands.pop()
             operator=s_operators.pop()
+            op_a=str(s_operands.pop())
+            op_b=str(s_operands.pop())
             s_operands.push(eval(op_a+operator+op_b))
         else:
             raise Exception("Expresion no valida")
