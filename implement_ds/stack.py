@@ -65,6 +65,7 @@ class Stack:
     
 
 #Nota: hacer otras implementaciones, de la pila
+
 """
 (3) Maximos y minimos
 Para tener el maximo elmento (más grande) y el minimo elmento (más pequeño)
