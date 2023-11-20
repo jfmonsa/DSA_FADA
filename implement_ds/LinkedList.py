@@ -12,15 +12,7 @@ class LinkedList(DynamicSet): #Heredar nodo aquí Node?
 
         #TODO: podemos implementar el tail tambien
 
-    """
-        https://github.com/GreatHayat/LinkedList-Python/blob/master/linked_list.py
-    """
-    #append
-    #search
-    #head
-    #tail
-    #next
-    #insert
+
     def is_empty(self)->bool:
         return self.head is None
 
@@ -45,22 +37,25 @@ class LinkedList(DynamicSet): #Heredar nodo aquí Node?
                 return x
             x=x.next
 
+    def delete(self,key):
+        previous_node = None
+        current_node = self.head
+        while not current_node is None:
+            if current_node.key==key:
+                if previous_node is None:
+                    self.head = current_node.next
+                else:
+                    previous_node.next = current_node.next
+                del current_node
+                break
+            previous_node=current_node
+            current_node=current_node.next
+
+
 """
-    def insert(self, data, after_node):
-        new_node = Node(data)
-        new_node.next_node = after_node.next_node
-        after_node.next_node = new_node
-
-    def remove(self, node):
-        if node is self.head:
-            self.head = node.next_node
-        else:
-            previous_node = self.head
-            while previous_node.next_node != node:
-                previous_node = previous_node.next_node
-
-            previous_node.next_node = node.next_node
-
+    https://github.com/GreatHayat/LinkedList-Python/blob/master/linked_list.py
+"""
+"""
     def print_list(self):
         current_node = self.head
         while current_node is not None:
