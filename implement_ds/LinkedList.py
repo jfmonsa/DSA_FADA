@@ -2,7 +2,7 @@ from implement_ds.DynamicSets import DynamicSet
 
 class Node:
     def __init__(self, key):
-        self.key : any = key #node value
+        self.key : any = key #node value (data)
         self.next : Node = None #next node
 
 class LinkedList(DynamicSet): #Heredar nodo aquí Node? 
@@ -10,41 +10,40 @@ class LinkedList(DynamicSet): #Heredar nodo aquí Node?
         self.head: Node = None
         self.tail: Node = None
 
+        #TODO: podemos implementar el tail tambien
+
     """
         https://github.com/GreatHayat/LinkedList-Python/blob/master/linked_list.py
     """
+    #append
+    #search
+    #head
+    #tail
+    #next
+    #insert
+    def is_empty(self)->bool:
+        return self.head is None
 
     def append(self,key):
-        """Add a Node at the end of the list"""
+        new_node = Node(key)
 
-        new_node=Node(key)
-
-        #si la lista esta vacia
-        if self.head is None:
-            self.head=new_node
-            self.tail=new_node
-
-        # Else traverse till the last node
+        if self.is_empty():
+            self.head = new_node
         else:
-            last_node = self.head
-            while last_node.next:
-                last_node = last_node.next
-
-            #Change the next of last node
-            last_node.next = new_node
-            self.tail=new_node
-
+            #traverse till last node
+            current_node = self.head
+            while not current_node.next is None:
+                current_node = current_node.next
+            #when the last node is empty append the new node
+            current_node.next= new_node
+            #self.tail=new_node
 
     def search(self,key):
         x=self.head
-        while x!=None and x!=self.key:
-            pass
-
-    """
-    def list_search(self,data): #append
-        x=self.head
-        while x!=None and x!=self.data
-    """
+        while x!=None:
+            if x.key==key:
+                return x
+            x=x.next
 
 """
     def insert(self, data, after_node):
