@@ -1,45 +1,26 @@
-Estructura de archivos actual
+## Organización del Proyecto
 
 ```
-proyecto
-├── .gitignore
-├── README.md
-├── implement_ds
-│   └── stack.py
+mi_repositorio/
+├── data_structures_implementation/
+│   ├── __init__.py
+│   ├── stack.py
+├── problems/
+│   ├── __init__.py
+│   ├── stacks/
+│   │   ├── __init__.py
+│   │   └── stack_problem.py
+├── tests/
+│   ├── __init__.py
+│   ├── stacks/
+│   │   ├── __init__.py
+│   │
 ├── main.py
-└── problems
-    └── stack-problems
-        ├── 1.easy-problems.py
-        ├── __pycache__
-        │   └── imports.cpython-311.pyc
-        ├── artmetic-expressions-infix-postfix-prefix.py
-        └── imports.py
+├── README.md
 ```
 
+Ejecutar el script de la solución de un problema
 
-Objetivo de estructura de archivos
-```
-mi_proyecto/
-|-- estructuras_de_datos/
-|   |-- pila.py
-|   |-- cola.py
-|   |-- lista_enlazada.py
-|   |-- arbol.py
-|   |-- ...
-|-- problemas/
-|   |-- pila_problema_1.py
-|   |-- pila_problema_2.py
-|   |-- cola_problema_1.py
-|   |-- lista_enlazada_problema_1.py
-|   |-- arbol_problema_1.py
-|   |-- ...
-|-- tests/
-|   |-- test_pila.py
-|   |-- test_cola.py
-|   |-- test_lista_enlazada.py
-|   |-- test_arbol.py
-|   |-- ...
-|-- main.py
-|-- README.md
-
+```bash
+python -m problems.stacks.math
 ```
