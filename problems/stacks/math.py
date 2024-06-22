@@ -1,6 +1,7 @@
 from data_structures_implementation.stack import Stack
 
 """
+Excercises 1:
 Main concepts: prefix (polish), infix, postfix (reverse-polish) notations
 """
 
@@ -20,6 +21,10 @@ def opAssociativity(operator: str):
 
 def isOperand(ch: str) -> bool:
     return ch.isalpha() or ch.isdigit()
+
+
+def isOperator(token: str) -> bool:
+    return token in "^*/+-"
 
 
 def doMath(op, left, right):
@@ -61,7 +66,7 @@ def infixToPostfix(exp: str) -> str:
                 postfixExp += stack.pop()
             # pop remaining "(" in stack
             stack.pop()
-        elif ch in ["^", "*", "/", "+", "-"]:
+        elif isOperator(ch):
             while (
                 (not stack.isEmpty())
                 and stack.peek() != "("
@@ -80,6 +85,54 @@ def infixToPostfix(exp: str) -> str:
     while not stack.isEmpty():
         postfixExp += stack.pop()
     return postfixExp
+
+
+def prefixToInfix(exp: str) -> str:
+    # Save operands in a stack
+    tokenList = exp.split()
+    stack = Stack()
+
+    i = len(tokenList) - 1
+    while i >= 0:
+        if isOperand(tokenList[i]):
+            stack.push(tokenList[i])
+        elif stack.size() >= 2:
+            stack.push("(" + str(stack.pop()) + tokenList[i] + str(stack.pop()) + ")")
+        i -= 1
+    return stack.pop()
+
+
+def prefixToPostfix(exp: str) -> str:
+    tokenList = exp.split()
+    stack = Stack()
+
+    i = len(tokenList) - 1
+    while i >= 0:
+        if isOperand(tokenList[i]):
+            stack.push(tokenList[i])
+        elif isOperator(tokenList[i]) and stack.size() >= 2:
+            stack.push(f"{stack.pop()} {stack.pop()} {tokenList[i]}")
+        i -= 1
+    return stack.pop()
+
+
+def postfixToPrefix(exp: str) -> str:
+    tokenList = exp.split()
+    stack = Stack()
+
+    for token in tokenList:
+        if isOperand(token):
+            stack.push(token)
+        elif isOperator(token) and stack.size() >= 2:
+            op2 = stack.pop()
+            stack.push(f"{token} {stack.pop()} {op2}")
+    return stack.pop()
+
+
+# TODO: postfixToInfix
+# TODO: infixToPrefix
+# evalPrefix
+# reverseString
 
 
 def validateParentheses(exp: str) -> bool:
@@ -127,3 +180,6 @@ if __name__ == "__main__":
     print(infixToPostfix("a+b*(c^d-e)^(f+g*h)-i"))
     print(validateParentheses("a+b*(c^d-e)^(f+g*h)-i"))
     print(evalPostfix("2 2 + 3 * 10 -"))
+    print(prefixToInfix("* - A / B C - / A K L"))
+    print(prefixToPostfix("* - A / B C - / A K L"))
+    print(postfixToPrefix("A B + C D - *"))
