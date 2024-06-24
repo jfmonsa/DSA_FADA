@@ -132,8 +132,12 @@ def postfixToPrefix(exp: str) -> str:
 
 # TODO: postfixToInfix
 # TODO: infixToPrefix
-# evalPrefix
-# reverseString
+"""
+TODO:
+
+implement a function to evaluate infix arithmetic, expressions:
+https://en.wikipedia.org/wiki/Shunting_yard_algorithm
+"""
 
 
 def validateParentheses(exp: str) -> bool:
@@ -197,3 +201,16 @@ if __name__ == "__main__":
     print(prefixToPostfix("* - A / B C - / A K L"))
     print(postfixToPrefix("a b c / - a d / e - *"))
     print(evalPrefix(postfixToPrefix("2 2 + 3 * 10 -")))
+    # TODO: implementar unit-testing
+    # test_expressions
+    infix_exps = [
+        "3+4*(2-1)",
+        "((A+B)-C*(D/E))+F",
+        "(5+3)*8-4",
+        "4*2+5*(2+1)/2",
+        "A*(B+C)/D",
+    ]
+
+    prefix_exps = ["*+A B-C D", "*-A/B C-/A K L"]
+
+    postfix_exprs = ["A B+C D-*", "A B C/-A K/L-*", "a b c++", "a b*c+"]
