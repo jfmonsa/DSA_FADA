@@ -125,7 +125,8 @@ def postfixToPrefix(exp: str) -> str:
             stack.push(token)
         elif isOperator(token) and stack.size() >= 2:
             op2 = stack.pop()
-            stack.push(f"{token} {stack.pop()} {op2}")
+            op1 = stack.pop()
+            stack.push(f"{token} {op1} {op2}")
     return stack.pop()
 
 
@@ -175,6 +176,18 @@ def evalPostfix(exp: str) -> int:
     return stack.pop()
 
 
+def evalPrefix(exp: str) -> int:
+    stack = Stack()
+    tokenList = exp.split()
+
+    for token in reversed(tokenList):
+        if isOperand(token):
+            stack.push(token)
+        elif isOperator(token) and stack.size() >= 2:
+            stack.push(doMath(token, int(stack.pop()), int(stack.pop())))
+    return stack.pop()
+
+
 if __name__ == "__main__":
     print(infixToPostfix("a+b*c+d"))
     print(infixToPostfix("a+b*(c^d-e)^(f+g*h)-i"))
@@ -182,4 +195,5 @@ if __name__ == "__main__":
     print(evalPostfix("2 2 + 3 * 10 -"))
     print(prefixToInfix("* - A / B C - / A K L"))
     print(prefixToPostfix("* - A / B C - / A K L"))
-    print(postfixToPrefix("A B + C D - *"))
+    print(postfixToPrefix("a b c / - a d / e - *"))
+    print(evalPrefix(postfixToPrefix("2 2 + 3 * 10 -")))

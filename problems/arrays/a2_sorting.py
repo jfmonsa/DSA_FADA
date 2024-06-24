@@ -78,6 +78,15 @@ def insertionSort(arr: list[int]) -> list[int]:
     return arr
 
 
+"""
+TODO: 4. Quick Sort
+"""
+
+
+"""
+TODO: 5. Merge Sort
+"""
+
 if "__main__" == __name__:
     lst1 = [99, 0, 5, 20, 123, 0, -1, 72, 21, 22, 13, 8, 7, 67, 29, 1, 2, 4]
     print(selectionSort([64, 25, 12, 22, 11]))
