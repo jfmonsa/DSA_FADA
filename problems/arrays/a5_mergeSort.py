@@ -40,26 +40,57 @@ def merge_ap1(l: list[int], r: list[int]) -> list[int]:
 """
 Approach 2: indexes
 """
-"""
-def mergeSort_ap2(arr:list[int])->list[int]:
-    if len(arr)<=0:
-        return None
-    return mergeSort_ap2_aux(0,len(arr)-1,arr)
 
-def mergeSort_ap2_aux(i,j,arr):
-    if i == j:
-        return arr[i]
-    mid = (i+j)//2
+
+def mergeSort_ap2(arr: list[int]) -> list[int]:
+    if len(arr) <= 1:
+        return arr
+    mergeSort_ap2_aux(0, len(arr) - 1, arr)
+    return arr
+
+
+def mergeSort_ap2_aux(i, j, arr):
+    """
+    i - pointer start
+    j - pointer end
+    """
+    # zero or one element
+    if i >= j:
+        return
+    mid = (i + j) // 2
 
     # sort the first and second halves
-    mergeSort_ap2_aux(i,mid,arr)
-    mergeSort_ap2_aux(mid+1,j,arr)
-    merge_ap2(arr,start,mid,end)
+    mergeSort_ap2_aux(i, mid, arr)
+    mergeSort_ap2_aux(mid + 1, j, arr)
+    merge_ap2(arr, i, mid, j)
 
-def merge_ap2(arr,start,mid,end):
 
-"""
+def merge_ap2(arr, start, mid, end):
+    left = arr[start : mid + 1]
+    right = arr[mid + 1 : end + 1]
+
+    i = j = 0
+    k = start
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            arr[k] = left[i]
+            i += 1
+        else:
+            arr[k] = right[j]
+            j += 1
+        k += 1
+
+    while i < len(left):
+        arr[k] = left[i]
+        i += 1
+        k += 1
+
+    while j < len(right):
+        arr[k] = right[j]
+        j += 1
+        k += 1
 
 
 if __name__ == "__main__":
-    print(mergeSort_ap1([84, 23, 29, 19, 71, 62, 63, 57]))
+    print(mergeSort_ap2([84, 23, 29, 19, 71, 62, 63, 57]))
