@@ -45,7 +45,7 @@ def majority_elm_ap2(arr: list[int]) -> int:
 def majority_elm_ap3(arr: list[int]) -> int:
     """
     Approach 3: voting algo
-    O(1) space
+    O(1) space, O(n) time
     """
 
     majority = arr[0]

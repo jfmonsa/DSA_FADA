@@ -1,12 +1,10 @@
 """
 1. Selection Sort
-
-The algorithm repeatedly selects the smallest (or largest) element from the unsorted
-portion of the list and swaps it with the first element of the unsorted part. This
-process is repeated for the remaining unsorted portion until the entire list is
++ current_item arr[i], current_minimum (key)
++ swap the current_item with current minimum
++ tener una particion ordenada y otra desordenada, ir iterando en la parted desordenada
+    el menor el elemento swappea el actual
 sorted. time comp: O(n²) ; space comp (Auxiliary space): O(1)
-
-TODO: fast/slow two pointers technique?
 """
 
 
@@ -27,28 +25,26 @@ def selectionSort(arr: list[int]) -> list[int]:
 
 
 """
-2. Buble Sort
+2. Bubble Sort
 
 + repeatedly swapping the adjacent elements if they are in the wrong order
-+ the highest will buble its way to the right with each iteration a sorted partitio
-for big number wil form at the end of the array
-    |-> that's why nested loop is until n - i
-+ El bucle externo va hasta el n - 1 para evitar error the out of index
++ a sort partition will form at the end of the array
+    |-> that's why nested loop is until n - 1
++ tip: use swapped variable approach
+
 """
 
 
-def bubleSort(arr: list[int]) -> list[int]:
-    n = len(arr)
+def bubbleSort(arr: list[int]) -> list[int]:
     swapped = True
     while swapped:
         swapped = False
         i = 0
-        while i < n - 1:
+        while i < len(arr) - 1:
             if arr[i] > arr[i + 1]:
+                # swap
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
                 swapped = True
-                aux = arr[i]
-                arr[i] = arr[i + 1]
-                arr[i + 1] = aux
             i += 1
     return arr
 
@@ -78,17 +74,7 @@ def insertionSort(arr: list[int]) -> list[int]:
     return arr
 
 
-"""
-TODO: 4. Quick Sort
-"""
-
-
-"""
-TODO: 5. Merge Sort
-"""
-
 if "__main__" == __name__:
     lst1 = [99, 0, 5, 20, 123, 0, -1, 72, 21, 22, 13, 8, 7, 67, 29, 1, 2, 4]
     print(selectionSort([64, 25, 12, 22, 11]))
-    print(bubleSort(lst1))
-    print(insertionSort(lst1))
+    print(bubbleSort(lst1))
