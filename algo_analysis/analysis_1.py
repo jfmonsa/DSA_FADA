@@ -87,16 +87,13 @@ def ex1_algo2_comp(n):
 # C
 
 """
-Note:
-En el código anterior como i depende de j vamos a escribir la linea temporalmente como
-$\sum_{i=1}^{n}t_{i}$(linea 6) ahora debemos analizar como se comporta $i$ vs $j$ para
-distintos valores de $n$ 
+Note: i vs j behavior
+In the next code, since i depends on j, we will temporarily write the line as
+$\sum_{i=1}^{n}t_{i}$ (line 6). Now we need to analyze how $i$ behaves vs $j$ for different values of $n$.
 
-Como vemos en $i$ vs $j$ la formula que obtenemos sería $t_j=i+1$ por lo que si reemplazamos
-en la sumatoria por lo tanto si reemplazamos $t_j$ en la sumatoria que teníamos tenemos que:
-$\sum_{i=1}^{n}(i+1)$ solo queda transformar esta sumatoria a su forma cerrada 
-$\sum_{i=1}^{n}(i+1) =  n(n+3)/2$ y sumarlo con los termos de los costos de las otras lineas
-para obtener el polinomio total $T(n)$
+As we can see in $i$ vs $j$, the formula we obtain is $t_j=i+1$, so if we replace it in the summation, we get:
+$\sum_{i=1}^{n}(i+1)$. We only need to transform this summation into its closed form:
+$\sum_{i=1}^{n}(i+1) = n(n+3)/2$ and add it with the terms of the costs of the other lines to obtain the total polynomial $T(n)$.
 """
 
 
