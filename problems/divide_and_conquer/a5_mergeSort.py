@@ -38,59 +38,55 @@ def merge_ap1(l: list[int], r: list[int]) -> list[int]:
 
 
 """
-Approach 2: indexes
+Approach 2: Merge Sort with indexes, inplace operatiosn
 """
 
 
-def mergeSort_ap2(arr: list[int]) -> list[int]:
-    if len(arr) <= 1:
-        return arr
-    mergeSort_ap2_aux(0, len(arr) - 1, arr)
+def mergeSort(arr):
+    mergeSort_aux(arr, 0, len(arr) - 1)
     return arr
 
 
-def mergeSort_ap2_aux(i, j, arr):
-    """
-    i - pointer start
-    j - pointer end
-    """
-    # zero or one element
-    if i >= j:
+def mergeSort_aux(arr, start, end):
+    # conquer
+    # Note: in-place operations, thus we don't have to return anything
+    if start >= end:
         return
-    mid = (i + j) // 2
+    # divide
+    mid = (start + end) // 2
+    mergeSort_aux(arr, start, mid)
+    mergeSort_aux(arr, mid + 1, end)
+    # combine
+    merge(arr, start, mid, end)
 
-    # sort the first and second halves
-    mergeSort_ap2_aux(i, mid, arr)
-    mergeSort_ap2_aux(mid + 1, j, arr)
-    merge_ap2(arr, i, mid, j)
 
-
-def merge_ap2(arr, start, mid, end):
-    left = arr[start : mid + 1]
-    right = arr[mid + 1 : end + 1]
-
-    i = j = 0
+def merge(arr, start, mid, end):
+    # subarrays
+    L = arr[start : mid + 1]
+    R = arr[mid + 1 : end + 1]
+    i = 0
+    j = 0
+    # index to the original array
     k = start
-
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            arr[k] = left[i]
+    while i < len(L) and j < len(R):
+        if L[i] <= R[j]:
+            arr[k] = L[i]
             i += 1
         else:
-            arr[k] = right[j]
+            arr[k] = R[j]
             j += 1
         k += 1
 
-    while i < len(left):
-        arr[k] = left[i]
+    while i < len(L):
+        arr[k] = L[i]
         i += 1
         k += 1
-
-    while j < len(right):
-        arr[k] = right[j]
+    while j < len(R):
+        arr[k] = R[j]
         j += 1
         k += 1
 
 
 if __name__ == "__main__":
-    print(mergeSort_ap2([84, 23, 29, 19, 71, 62, 63, 57]))
+    print(mergeSort([84, 23, 29, 19, 71, 62, 63, 57]))
+    print(mergeSort([38, 27, 43, 10]))

@@ -23,4 +23,8 @@ def removeDuplicates(nums: list[int]) -> list[int]:
         else:
             l += 1
             nums[l] = nums[r]
-    return len(nums[: l + 1])
+    return l + 1
+
+
+if __name__ == "__main__":
+    print(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]))

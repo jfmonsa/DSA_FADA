@@ -74,6 +74,39 @@ def insertionSort(arr: list[int]) -> list[int]:
     return arr
 
 
+"""
+4. Counting Sort
+"""
+
+
+def countingSort(arr: list[int]) -> list[int]:
+
+    n = len(arr)
+    # find max and min
+    min_elm = min(arr)
+    max_elm = max(arr)
+
+    # initialize coutring arr (+1 for 0-index)
+    m = max_elm - min_elm + 1
+    count_arr = [0] * (m)
+
+    # Couting occurrences
+    for elm in arr:
+        count_arr[elm] += 1
+
+    # cumulative sum
+    # Modify count_arr
+    # para que cada elemento en la posición $i$ contenga la suma de los conteos anteriores.
+    # Esto permite determinar la posición final de cada elemento en el array ordenado.
+    # countArray[i] = countArray[i – 1] + countArray[i].
+
+    for i in range(1, m):
+        count_arr[i] += count_arr[i - 1]
+
+    for i in range(n):
+        arr[i]
+
+
 if "__main__" == __name__:
     lst1 = [99, 0, 5, 20, 123, 0, -1, 72, 21, 22, 13, 8, 7, 67, 29, 1, 2, 4]
     print(selectionSort([64, 25, 12, 22, 11]))
