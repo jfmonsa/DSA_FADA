@@ -76,38 +76,50 @@ def insertionSort(arr: list[int]) -> list[int]:
 
 """
 4. Counting Sort
+
+0. min y max elemts to create count_arr of m size m = max-min+1
+1. dos arrays auxiliares count_arr y output
+2. cumulative sum  in count_arr. each value marks the final index of a certain value
+3. iterate fron n-1 to 0 in input array and output[count_arr[index]-1] where index = arr[i]-min_elm
+    and decrease count_arr[index]-=1
+-> Note: We iterate from Right to Left in the sorting steps in order to guarantee the algorithm stability
+    keep the relative order of the elements with equal values
 """
 
 
-def countingSort(arr: list[int]) -> list[int]:
-
+def countingSort(arr):
     n = len(arr)
-    # find max and min
-    min_elm = min(arr)
-    max_elm = max(arr)
-
-    # initialize coutring arr (+1 for 0-index)
-    m = max_elm - min_elm + 1
-    count_arr = [0] * (m)
-
-    # Couting occurrences
-    for elm in arr:
-        count_arr[elm] += 1
+    # min and max
+    if n <= 1:
+        return arr
+    min_elm = max_elm = arr[0]
+    for i in range(1, n):
+        if arr[i] < min_elm:
+            min_elm = arr[i]
+        if arr[i] > max_elm:
+            max_elm = arr[i]
+    # count
+    k = max_elm - min_elm + 1
+    count_arr = [0] * k
+    for i in range(n):
+        count_arr[arr[i] - min_elm] += 1
 
     # cumulative sum
-    # Modify count_arr
-    # para que cada elemento en la posición $i$ contenga la suma de los conteos anteriores.
-    # Esto permite determinar la posición final de cada elemento en el array ordenado.
-    # countArray[i] = countArray[i – 1] + countArray[i].
-
-    for i in range(1, m):
+    for i in range(1, k):
         count_arr[i] += count_arr[i - 1]
 
-    for i in range(n):
-        arr[i]
+    # sort
+    output_arr = [0] * n
+    for i in range(n - 1, -1, -1):
+        index = arr[i] - min_elm
+        output_arr[count_arr[index] - 1] = arr[i]
+        count_arr[index] -= 1
+    return output_arr
 
 
 if "__main__" == __name__:
     lst1 = [99, 0, 5, 20, 123, 0, -1, 72, 21, 22, 13, 8, 7, 67, 29, 1, 2, 4]
     print(selectionSort([64, 25, 12, 22, 11]))
     print(bubbleSort(lst1))
+    print(countingSort([2, 5, 3, 0, 2, 3, 0, 3]))
+    print(countingSort([1, 4, 1, 2, 7, 5, 2]))
