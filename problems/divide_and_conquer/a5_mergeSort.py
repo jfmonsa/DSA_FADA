@@ -38,8 +38,24 @@ def merge_ap1(l: list[int], r: list[int]) -> list[int]:
 
 
 """
-Approach 2: Merge Sort with indexes, inplace operatiosn
+Approach 2: Merge Sort with indexes, in-place operatiosn
+(conquer)
++ if start >= end: return 
+(divide)
++ else: mid = (start+end)//2
++ order right and left mergeSort(arr,start,mid) mergeSort(arr,mid+1,end)
+(combine)
++ merge(arr,start,mid,end)
++ 2 subarrays Left[start:mid+1] and Right[mid+1 : end]
++ i and j pointers for Left and Right subarrays
++ k=start pointr for original arr
++ while L and R are not empty compare if L[i]<=R[j]
++ while L is not empty append to arr
++ while R is not empty append to R
+
+T(n) = 2T(n/2)+O(n) <-> T(n)=O(nlog(n))
 """
+# TODO: Change mid = (start+end)//2 to avoid overflow with big numbers
 
 
 def mergeSort(arr):

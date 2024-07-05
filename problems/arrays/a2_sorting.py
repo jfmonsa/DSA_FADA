@@ -77,10 +77,10 @@ def insertionSort(arr: list[int]) -> list[int]:
 """
 4. Counting Sort
 
-0. min y max elemts to create count_arr of m size m = max-min+1
+0. min y max elements to create count_arr of m size m = max-min+1
 1. dos arrays auxiliares count_arr y output
 2. cumulative sum  in count_arr. each value marks the final index of a certain value
-3. iterate fron n-1 to 0 in input array and output[count_arr[index]-1] where index = arr[i]-min_elm
+3. iterate from n-1 to 0 in input array and output[count_arr[index]-1] where index = arr[i]-min_elm
     and decrease count_arr[index]-=1
 -> Note: We iterate from Right to Left in the sorting steps in order to guarantee the algorithm stability
     keep the relative order of the elements with equal values
