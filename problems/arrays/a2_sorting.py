@@ -2,24 +2,23 @@
 1. Selection Sort
 + current_item arr[i], current_minimum (key)
 + swap the current_item with current minimum
-+ tener una particion ordenada y otra desordenada, ir iterando en la parted desordenada
++ tener una particion ordenada y otra desordenada, ir iterando en la parte desordenada
     el menor el elemento swappea el actual
 sorted. time comp: O(n²) ; space comp (Auxiliary space): O(1)
 """
 
 
 def selectionSort(arr: list[int]) -> list[int]:
+    n = len(arr)
     i = 0
-    while i < len(arr):
-        minIdx = i
+    while i < n - 1:
+        key = i
         j = i + 1
-        while j < len(arr):
-            if arr[minIdx] > arr[j]:
-                minIdx = j
+        while j < n:
+            if arr[key] > arr[j]:
+                key = j
             j += 1
-        current = arr[i]
-        arr[i] = arr[minIdx]
-        arr[minIdx] = current
+        arr[key], arr[i] = arr[i], arr[key]
         i += 1
     return arr
 
@@ -39,12 +38,11 @@ def bubbleSort(arr: list[int]) -> list[int]:
     swapped = True
     while swapped:
         swapped = False
-        i = 0
-        while i < len(arr) - 1:
-            if arr[i] > arr[i + 1]:
-                # swap
-                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        i = 1
+        while i < len(arr):
+            if arr[i - 1] > arr[i]:
                 swapped = True
+                arr[i - 1], arr[i] = arr[i], arr[i - 1]
             i += 1
     return arr
 
@@ -122,4 +120,4 @@ if "__main__" == __name__:
     print(selectionSort([64, 25, 12, 22, 11]))
     print(bubbleSort(lst1))
     print(countingSort([2, 5, 3, 0, 2, 3, 0, 3]))
-    print(countingSort([1, 4, 1, 2, 7, 5, 2]))
+    print(countingSort2([1, 4, 1, 2, 7, 5, 2]))

@@ -9,6 +9,15 @@ Consider the number of unique elements of nums to be k, to get accepted, you nee
 Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially.
 The remaining elements of nums are not important as well as the size of nums.
 Return k.
+
+Approach:
+- l points to the last position of unique elements
+- r scans the array for new unique elements
+- When a new unique element is found, it's placed after l
+- Returns the number of unique elements
+
+Time complexity: O(n)
+Space complexity: O(1)
 """
 
 

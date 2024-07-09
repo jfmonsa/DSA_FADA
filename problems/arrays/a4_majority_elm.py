@@ -22,7 +22,7 @@ def majority_elm_ap1(arr: list[int]) -> int:
 def majority_elm_ap2(arr: list[int]) -> int:
     """
     Approach 2:
-    using a hash table such a dictionary
+    using a hash table such as a dictionary
 
     time: O(n)
     aux space: O(n)

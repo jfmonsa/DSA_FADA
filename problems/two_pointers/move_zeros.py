@@ -4,7 +4,15 @@ Leetcode Move Zeros
 Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
 Note that you must do this in-place without making a copy of the array.
+
+
+Approach:
 Tip: two pointers: fast/slow approach
+1. if l != 0, go forward
+2. if r ==0, go forward and check for a non-zero value
+3. else: swap
+
+zeros will go to the end
 """
 
 
