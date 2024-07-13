@@ -17,19 +17,18 @@ class BinaryTree:
 
     # preorder print: time O(n) (n nodes);  space: O(n) (call stack)
     def print_preorder(self):
-        return self._print_preorder_aux(self.root).rstrip(",")
+        lst = []
+        self._print_preorder_aux(self.root, lst)
+        return lst
 
-    def _print_preorder_aux(self, node):
+    def _print_preorder_aux(self, node, lst):
         if node is not None:
             # Root -> left -> right
-            return (
-                str(node.data)
-                + ","
-                + self._print_preorder_aux(node.leftNode)
-                + self._print_preorder_aux(node.rightNode)
-            )
+            lst.append(str(node.data))
+            self._print_preorder_aux(node.leftNode, lst)
+            self._print_preorder_aux(node.rightNode, lst)
         # base case
-        return ""
+        return
 
 
 if __name__ == "__main__":
