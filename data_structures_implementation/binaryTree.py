@@ -10,10 +10,19 @@ class BinaryTree:
         self.root = BinaryTreeNode(root) if root is not None else None
 
     # height
+    """
+    Is like counting nodes to a leaf in the longest path
+    """
 
-    # level of a given node in tree
+    def height(self, root):
+        # base case
+        if root is None:
+            return 0
+        left_height = self.height(root.leftNode)
+        right_height = self.height(root.rightNode)
+        return max(left_height, right_height) + 1
 
-    # search node in tree
+    # depth: distance from root to current node
 
     # preorder print: time O(n) (n nodes);  space: O(n) (call stack)
     def print_preorder(self):
@@ -97,6 +106,7 @@ if __name__ == "__main__":
     tree_1.root.rightNode = BinaryTreeNode(3)
     tree_1.root.leftNode.leftNode = BinaryTreeNode(4)
     print(tree_1.print_preorder())
+    print(tree_1.height(tree_1.root))
 
     # 1. binary search tree
     bst_1 = BinarySearchTree(4)
@@ -104,4 +114,6 @@ if __name__ == "__main__":
     bst_1.insert_iterative(7)
     bst_1.insert(1)
     bst_1.insert(5)
+    bst_1.insert(0)
     print(bst_1.print_preorder())
+    print(bst_1.height(bst_1.root))
