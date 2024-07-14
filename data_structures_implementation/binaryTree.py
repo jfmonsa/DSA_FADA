@@ -23,21 +23,66 @@ class BinaryTree:
         return max(left_height, right_height) + 1
 
     # depth: distance from root to current node
-
-    # preorder print: time O(n) (n nodes);  space: O(n) (call stack)
-    def print_preorder(self):
+    def preorder_iterative(self):
         lst = []
-        self._print_preorder_aux(self.root, lst)
+        stack = []
+
+        current_node = self.root
+        while current_node or stack:
+            while current_node:
+                lst.append(current_node.data)
+                stack.append(current_node)
+                current_node = current_node.leftNode
+
+            current_node = stack.pop()
+            current_node = current_node.rightNode
         return lst
 
-    def _print_preorder_aux(self, node, lst):
+    def preorder(self):
+        """
+        preorder print: time O(n) (n nodes);  space: O(n) (call stack)
+        """
+        lst = []
+        self._preorder_aux(self.root, lst)
+        return lst
+
+    # Depth-First Search Algos (DFS)
+    def _preorder_aux(self, node, lst):
         if node is not None:
             # node -> left -> right
-            lst.append(str(node.data))
-            self._print_preorder_aux(node.leftNode, lst)
-            self._print_preorder_aux(node.rightNode, lst)
+            lst.append(node.data)
+            self._preorder_aux(node.leftNode, lst)
+            self._preorder_aux(node.rightNode, lst)
         # base case
         return
+
+    # inorder
+    def inorder_iterative(self):
+        lst = []
+        stack = []
+        # go to left
+        current_node = self.root
+        while current_node or stack:
+            # go to left and add to stack
+            while current_node:
+                stack.append(current_node)
+                current_node = current_node.leftNode
+            current_node = stack.pop()
+            lst.append(current_node.data)
+            current_node = current_node.rightNode
+        return lst
+
+    def inorder(self):
+        lst = []
+        self._inorder_aux(self.root, lst)
+        return lst
+
+    def _inorder_aux(self, node, lst):
+        if node is None:
+            return
+        self._inorder_aux(node.leftNode, lst)
+        lst.append(node.data)
+        self._inorder_aux(node.rightNode, lst)
 
 
 class BinarySearchTree(BinaryTree):
@@ -105,7 +150,10 @@ if __name__ == "__main__":
     tree_1.root.leftNode = BinaryTreeNode(2)
     tree_1.root.rightNode = BinaryTreeNode(3)
     tree_1.root.leftNode.leftNode = BinaryTreeNode(4)
-    print(tree_1.print_preorder())
+    print(tree_1.preorder())
+    print(tree_1.preorder_iterative())
+    print(tree_1.inorder())
+    print(tree_1.inorder_iterative())
     print(tree_1.height(tree_1.root))
 
     # 1. binary search tree
@@ -115,5 +163,5 @@ if __name__ == "__main__":
     bst_1.insert(1)
     bst_1.insert(5)
     bst_1.insert(0)
-    print(bst_1.print_preorder())
+    print(bst_1.preorder())
     print(bst_1.height(bst_1.root))
