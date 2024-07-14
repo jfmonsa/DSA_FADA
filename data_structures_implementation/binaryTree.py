@@ -23,12 +23,64 @@ class BinaryTree:
 
     def _print_preorder_aux(self, node, lst):
         if node is not None:
-            # Root -> left -> right
+            # node -> left -> right
             lst.append(str(node.data))
             self._print_preorder_aux(node.leftNode, lst)
             self._print_preorder_aux(node.rightNode, lst)
         # base case
         return
+
+
+class BinarySearchTree(BinaryTree):
+    def insert(self, value):
+        self._insert_aux(value, self.root)
+        return self.root
+
+    """
+    Recursive approach:
+    Time complexity:
+        O(h), h is height of the tree
+        O(n) when h = n is the worst case (like linked list)
+
+    Space:
+        O(h) (callstack)
+    """
+
+    def _insert_aux(self, value, cur_node):
+        # base case
+        if cur_node is None:
+            return BinaryTreeNode(value)
+        # recurseive cases
+        if value < cur_node.data:
+            cur_node.leftNode = self._insert_aux(value, cur_node.leftNode)
+        else:
+            cur_node.rightNode = self._insert_aux(value, cur_node.rightNode)
+        return cur_node
+
+    """
+    Iterative approach:
+    time: O(n)
+    space: O(1) (Only Pointers)
+    """
+
+    def insert_iterative(self, value):
+        new_node = BinaryTreeNode(value)
+
+        if self.root is None:
+            self.root = new_node
+
+        current_node = self.root
+        while True:
+            if value < current_node.data:
+                if not current_node.leftNode:
+                    current_node.leftNode = new_node
+                    return
+                current_node = current_node.leftNode
+            else:
+                if not current_node.rightNode:
+                    current_node.rightNode = new_node
+                    return
+                current_node = current_node.rightNode
 
 
 if __name__ == "__main__":
@@ -45,3 +97,11 @@ if __name__ == "__main__":
     tree_1.root.rightNode = BinaryTreeNode(3)
     tree_1.root.leftNode.leftNode = BinaryTreeNode(4)
     print(tree_1.print_preorder())
+
+    # 1. binary search tree
+    bst_1 = BinarySearchTree(4)
+    bst_1.insert(2)
+    bst_1.insert_iterative(7)
+    bst_1.insert(1)
+    bst_1.insert(5)
+    print(bst_1.print_preorder())
