@@ -22,7 +22,10 @@ class BinaryTree:
         right_height = self.height(root.rightNode)
         return max(left_height, right_height) + 1
 
-    # depth: distance from root to current node
+    # TODO: depth: distance from root to current node
+
+    # Depth-First Search Algos (DFS)
+    # preorder
     def preorder_iterative(self):
         lst = []
         stack = []
@@ -46,7 +49,6 @@ class BinaryTree:
         self._preorder_aux(self.root, lst)
         return lst
 
-    # Depth-First Search Algos (DFS)
     def _preorder_aux(self, node, lst):
         if node is not None:
             # node -> left -> right
@@ -83,6 +85,64 @@ class BinaryTree:
         self._inorder_aux(node.leftNode, lst)
         lst.append(node.data)
         self._inorder_aux(node.rightNode, lst)
+
+    # postorder
+    """
+    There are 3 main approaches for an iterative postorder
+    """
+
+    # 1st approach: Using 2 stacks Time: O(n), O(n)
+    def postorder_iterative_1(self):
+        stack1 = [self.root]
+        stack2 = []
+        output = []
+
+        while stack1:
+            node = stack1.pop()
+            stack2.append(node)
+
+            if node.leftNode:
+                stack1.append(node.leftNode)
+
+            if node.rightNode:
+                stack2.append(node.rightNode)
+
+        while stack2:
+            output.append(stack2.pop())
+
+        return output
+
+    # 2nd approach, using one stack and a prev pointer
+    def postorder_iterative_2(self):
+        stack = [self.root]
+        prev = None
+        output = []
+
+        while stack:
+            # stack.top()
+            current_node = stack[-1]
+
+            if (
+                not prev
+                or prev.leftNode == current_node
+                or prev.rightNode == current_node
+            ):
+                if current_node.leftNode:
+                    stack.append(current_node.leftNode)
+
+                elif current_node.rightNode:
+                    stack.append(current_node.rightNode)
+
+            elif current_node.leftNode == prev:
+                if current_node.rightNode:
+                    stack.append(current_node.rightNode)
+
+            else:
+                output.append(current_node.data)
+                stack.pop()
+
+            prev = current_node
+        return output
 
 
 class BinarySearchTree(BinaryTree):
@@ -143,13 +203,16 @@ if __name__ == "__main__":
           1
         /   \
        2     3
-      /
-     4
+      / \   / \
+     4   0  7  9
     """
     tree_1 = BinaryTree(1)
     tree_1.root.leftNode = BinaryTreeNode(2)
     tree_1.root.rightNode = BinaryTreeNode(3)
     tree_1.root.leftNode.leftNode = BinaryTreeNode(4)
+    tree_1.root.leftNode.rightNode = BinaryTreeNode(0)
+    tree_1.root.rightNode.leftNode = BinaryTreeNode(7)
+    tree_1.root.rightNode.leftNode = BinaryTreeNode(9)
     print(tree_1.preorder())
     print(tree_1.preorder_iterative())
     print(tree_1.inorder())
