@@ -120,4 +120,4 @@ if "__main__" == __name__:
     print(selectionSort([64, 25, 12, 22, 11]))
     print(bubbleSort(lst1))
     print(countingSort([2, 5, 3, 0, 2, 3, 0, 3]))
-    print(countingSort2([1, 4, 1, 2, 7, 5, 2]))
+    print(countingSort([1, 4, 1, 2, 7, 5, 2]))
