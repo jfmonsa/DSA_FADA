@@ -11,6 +11,7 @@ The remaining elements of nums are not important as well as the size of nums.
 Return k.
 
 Approach:
++ fast / slow pointers
 - l points to the last position of unique elements
 - r scans the array for new unique elements
 - When a new unique element is found, it's placed after l

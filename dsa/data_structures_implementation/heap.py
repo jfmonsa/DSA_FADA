@@ -82,7 +82,7 @@ class MinHeap:
 
     """
     O(lg(n))
-    Keep swapping the node with its parent if it is smaller
+    Keep swapping the node with its parent if it is greater than current node
     """
 
     def _siftup(self, i):
